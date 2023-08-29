@@ -1,6 +1,7 @@
 <script>
 	import { getRate } from '$lib/utils/getRate';
 	import { onMount } from 'svelte';
+	import { format } from 'date-fns';
 
 	export let data;
 
@@ -54,6 +55,10 @@
 			};
 		});
 	});
+	function formatDate(inputDate) {
+		const date = new Date(inputDate);
+		return format(date, 'MMM dd');
+	}
 </script>
 
 <div class="container">
@@ -64,7 +69,7 @@
 	{#each ordersConverted as item}
 		<div>{item.itemName}</div>
 		<div>{item.itemId}</div>
-		<div>{item.date}</div>
+		<div>{formatDate(item.date)}</div>
 		<div>{item.amount}</div>
 	{/each}
 </div>
